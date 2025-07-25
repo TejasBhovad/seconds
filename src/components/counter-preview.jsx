@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Clock, User } from "lucide-react";
+import { getFontStyles } from "@/lib/utils";
 
 const CounterPreview = ({ countData }) => {
   if (!countData) return null;
@@ -14,7 +15,11 @@ const CounterPreview = ({ countData }) => {
     image,
     creator = {},
     slug = "preview-slug",
+    fontStyle = "modern",
   } = countData;
+
+  // Get font styles based on selected font
+  const fontStyles = getFontStyles(fontStyle);
 
   // Countdown logic (live)
   const [timeLeft, setTimeLeft] = useState({
@@ -60,7 +65,7 @@ const CounterPreview = ({ countData }) => {
     <Card className="transition-all duration-300 hover:shadow-lg">
       <CardContent className="flex flex-col items-center justify-center p-4">
         <div
-          className="mb-2 text-3xl font-extrabold tabular-nums md:text-5xl"
+          className={`mb-2 text-3xl font-extrabold tabular-nums md:text-5xl ${fontStyles.className}`}
           style={{
             color: colors.primary || "#2563eb",
             letterSpacing: "1px",
@@ -69,7 +74,7 @@ const CounterPreview = ({ countData }) => {
           {String(value).padStart(2, "0")}
         </div>
         <div
-          className="text-xs font-semibold tracking-widest uppercase"
+          className={`text-xs font-semibold tracking-widest uppercase ${fontStyles.fontFamily}`}
           style={{
             color: colors.muted || "#95a7c8",
           }}
@@ -116,20 +121,20 @@ const CounterPreview = ({ countData }) => {
               {category?.toUpperCase?.() || category}
             </Badge>
             <h1
-              className="mb-2 text-4xl font-extrabold text-white capitalize drop-shadow-xl md:text-5xl"
+              className={`mb-2 text-4xl font-extrabold text-white capitalize drop-shadow-xl md:text-5xl ${fontStyles.className}`}
               style={{ position: "relative", zIndex: 2 }}
             >
               {name}
             </h1>
             <p
-              className="mb-4 text-base font-medium text-white/90 md:text-lg"
+              className={`mb-4 text-base font-medium text-white/90 md:text-lg ${fontStyles.fontFamily}`}
               style={{ position: "relative", zIndex: 2 }}
             >
               <Clock className="mr-2 inline h-5 w-5" />
               {formatDate(date)}
             </p>
             <div
-              className="flex items-center justify-center gap-2 text-white/80"
+              className={`flex items-center justify-center gap-2 text-white/80 ${fontStyles.fontFamily}`}
               style={{ position: "relative", zIndex: 2 }}
             >
               <User className="h-4 w-4" />
@@ -144,7 +149,7 @@ const CounterPreview = ({ countData }) => {
         <div className="mx-auto max-w-2xl">
           <div className="mb-8 text-center">
             <h2
-              className="mb-3 text-2xl font-bold md:text-3xl"
+              className={`mb-3 text-2xl font-bold md:text-3xl ${fontStyles.className}`}
               style={{
                 color: colors.inverted || colors.secondary || "#1d4ed8",
               }}
@@ -152,7 +157,7 @@ const CounterPreview = ({ countData }) => {
               Event Countdown
             </h2>
             <p
-              className="text-base"
+              className={`text-base ${fontStyles.fontFamily}`}
               style={{ color: colors.muted || "#64748b" }}
             >
               Time remaining until the event begins

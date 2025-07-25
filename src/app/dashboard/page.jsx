@@ -88,6 +88,7 @@ const Dashboard = () => {
             ":00",
         ),
         theme: eventData.fontStyle || "modern",
+        fontStyle: eventData.fontStyle || "modern",
         colors: {
           primary: resolveColorValue(eventData.primaryColor) || "#000000",
           muted: resolveColorValue(eventData.mutedColor) || "#FFFFFF",
@@ -172,6 +173,7 @@ const Dashboard = () => {
                       inverted: themeInfo.secondaryColor,
                       background: themeInfo.backgroundColor,
                     },
+                    fontStyle: themeInfo.fontStyle,
                     image: basicInfo.imageUrl,
                     creator: user || {},
                     slug: basicInfo.slug,

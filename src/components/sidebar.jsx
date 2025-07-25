@@ -19,7 +19,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { CalendarIcon, Upload, Plus, X, Clock } from "lucide-react";
+import {
+  CalendarIcon,
+  Upload,
+  Plus,
+  X,
+  Clock,
+  Type,
+  Italic,
+  Sparkles,
+  Crown,
+} from "lucide-react";
 import { format } from "date-fns";
 
 export function Sidebar({
@@ -38,10 +48,42 @@ export function Sidebar({
   setThemeInfo,
 }) {
   const fontStyles = [
-    { id: "modern", name: "Modern", preview: "Aa" },
-    { id: "classic", name: "Classic", preview: "Aa" },
-    { id: "playful", name: "Playful", preview: "Aa" },
-    { id: "elegant", name: "Elegant", preview: "Aa" },
+    {
+      id: "modern",
+      name: "Modern",
+      preview: "Aa",
+      icon: <Type className="h-4 w-4" />,
+      fontWeight: "font-medium",
+      className: "font-inter",
+      description: "Clean & minimal",
+    },
+    {
+      id: "classic",
+      name: "Classic",
+      preview: "Aa",
+      icon: <Italic className="h-4 w-4" />,
+      fontWeight: "font-normal",
+      className: "font-serif",
+      description: "Timeless elegance",
+    },
+    {
+      id: "playful",
+      name: "Playful",
+      preview: "Aa",
+      icon: <Sparkles className="h-4 w-4" />,
+      fontWeight: "font-bold",
+      className: "font-comic",
+      description: "Fun & friendly",
+    },
+    {
+      id: "elegant",
+      name: "Elegant",
+      preview: "Aa",
+      icon: <Crown className="h-4 w-4" />,
+      fontWeight: "font-light",
+      className: "font-playfair",
+      description: "Sophisticated",
+    },
   ];
 
   // Generate slug from title
@@ -560,17 +602,27 @@ export function Sidebar({
                         fontStyle: font.id,
                       }))
                     }
-                    className={`rounded-lg border p-2 text-center transition-colors ${
+                    className={`rounded-lg border p-3 text-center transition-colors ${
                       themeInfo.fontStyle === font.id
                         ? "border-sidebar-primary bg-sidebar-accent"
                         : "border-sidebar-border hover:border-sidebar-primary/50 hover:bg-sidebar-accent/50"
                     }`}
                   >
-                    <div className="text-sidebar-foreground text-lg font-bold">
-                      {font.preview}
-                    </div>
-                    <div className="text-muted-foreground text-xs">
-                      {font.name}
+                    <div className="flex flex-col items-center space-y-1">
+                      <div className="text-sidebar-foreground mb-1">
+                        {font.icon}
+                      </div>
+                      <div
+                        className={`text-sidebar-foreground text-2xl ${font.fontWeight} ${font.className} leading-none`}
+                      >
+                        {font.preview}
+                      </div>
+                      <div className="text-sidebar-foreground mt-1 text-xs font-medium">
+                        {font.name}
+                      </div>
+                      <div className="text-muted-foreground text-center text-[10px]">
+                        {font.description}
+                      </div>
                     </div>
                   </button>
                 ))}
