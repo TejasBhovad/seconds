@@ -26,9 +26,9 @@ const Navbar = ({ session }) => {
 const NavbarWrapper = ({ children }) => {
   const { data: session } = useSession();
   return (
-    <main className="flex min-h-screen w-full flex-col bg-white">
+    <main className="flex h-full min-h-screen w-full flex-col bg-white">
       <Navbar session={session} />
-      <section className="w-full flex-grow pt-14">{children}</section>
+      <section className="h-full w-full flex-grow pt-14">{children}</section>
     </main>
   );
 };
