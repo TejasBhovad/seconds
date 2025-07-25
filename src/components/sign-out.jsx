@@ -5,7 +5,11 @@ import React from "react";
 
 const SignOut = () => {
   return (
-    <Button variant="ghost" onClick={() => signOut()}>
+    <Button
+      variant="ghost"
+      className={"hover:bg-muted"}
+      onClick={() => signOut()}
+    >
       Sign Out
     </Button>
   );

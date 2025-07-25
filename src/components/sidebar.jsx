@@ -22,30 +22,21 @@ import {
 import { CalendarIcon, Upload, Plus, X, Clock } from "lucide-react";
 import { format } from "date-fns";
 
-export function Sidebar({ isOpen, onToggle, onEventCreate }) {
-  const [currentStep, setCurrentStep] = useState(1); // 1 = basic, 2 = themes
-  const [isLoading, setIsLoading] = useState(false);
-  const [imageUploading, setImageUploading] = useState(false);
-
-  // Basic Information State
-  const [basicInfo, setBasicInfo] = useState({
-    title: "",
-    slug: "",
-    category: null,
-    imageUrl: null,
-    date: null,
-    time: "",
-  });
-
-  // Theme State with blue-themed hex colors as defaults
-  const [themeInfo, setThemeInfo] = useState({
-    primaryColor: "#2563eb", // Blue-600
-    secondaryColor: "#1d4ed8", // Blue-700
-    backgroundColor: "#f8fafc", // Slate-50
-    mutedColor: "#64748b", // Slate-500
-    fontStyle: "modern",
-  });
-
+export function Sidebar({
+  isOpen,
+  onToggle,
+  onEventCreate,
+  currentStep,
+  setCurrentStep,
+  isLoading,
+  setIsLoading,
+  imageUploading,
+  setImageUploading,
+  basicInfo,
+  setBasicInfo,
+  themeInfo,
+  setThemeInfo,
+}) {
   const fontStyles = [
     { id: "modern", name: "Modern", preview: "Aa" },
     { id: "classic", name: "Classic", preview: "Aa" },

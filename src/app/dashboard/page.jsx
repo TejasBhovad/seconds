@@ -5,11 +5,31 @@ import { useRouter } from "next/navigation";
 import { Sidebar } from "@/components/sidebar";
 import { useUser } from "@/providers/user";
 import { Menu, X } from "lucide-react";
-
+import CounterPreview from "@/components/counter-preview";
 const Dashboard = () => {
   const { user, loading, isAuthenticated } = useUser();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const router = useRouter();
+
+  // LIFTED STATE: Event info for sidebar and preview
+  const [currentStep, setCurrentStep] = useState(1); // 1 = basic, 2 = themes
+  const [isLoading, setIsLoading] = useState(false);
+  const [imageUploading, setImageUploading] = useState(false);
+  const [basicInfo, setBasicInfo] = useState({
+    title: "",
+    slug: "",
+    category: null,
+    imageUrl: null,
+    date: null,
+    time: "",
+  });
+  const [themeInfo, setThemeInfo] = useState({
+    primaryColor: "#2563eb",
+    secondaryColor: "#1d4ed8",
+    backgroundColor: "#f8fafc",
+    mutedColor: "#64748b",
+    fontStyle: "modern",
+  });
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -122,7 +142,7 @@ const Dashboard = () => {
   return (
     <div className="flex h-full">
       <div className="relative flex-1 transition-all duration-300">
-        <div className="flex h-full w-full items-center justify-center bg-green-400">
+        <div className="flex h-full w-full items-center justify-center bg-green-400/0">
           <button
             onClick={toggleSidebar}
             className="absolute top-4 right-4 z-10 rounded-lg bg-white p-2 shadow-lg transition-colors hover:bg-gray-50"
@@ -133,9 +153,33 @@ const Dashboard = () => {
           <div className="text-center">
             <h1 className="mb-4 text-2xl font-bold text-white">Dashboard</h1>
             {isAuthenticated ? (
-              <div className="text-white/80">
-                <p>Welcome back, {user?.name || user?.email}!</p>
-                <p>Use the sidebar to create a new event</p>
+              <div className="flex flex-col items-center">
+                <CounterPreview
+                  countData={{
+                    name: basicInfo.title,
+                    date: basicInfo.date
+                      ? typeof basicInfo.date === "string"
+                        ? basicInfo.date
+                        : basicInfo.date.toISOString()
+                      : new Date().toISOString(),
+                    category:
+                      basicInfo.category?.name ||
+                      basicInfo.category?.slug ||
+                      "general",
+                    colors: {
+                      primary: themeInfo.primaryColor,
+                      muted: themeInfo.mutedColor,
+                      inverted: themeInfo.secondaryColor,
+                      background: themeInfo.backgroundColor,
+                    },
+                    image: basicInfo.imageUrl,
+                    creator: user || {},
+                    slug: basicInfo.slug,
+                  }}
+                />
+                <p className="text-white/80">
+                  Create and manage your events here.
+                </p>
               </div>
             ) : (
               <p className="text-white/80">Please login to create events</p>
@@ -148,6 +192,16 @@ const Dashboard = () => {
         isOpen={sidebarOpen}
         onToggle={toggleSidebar}
         onEventCreate={handleEventCreate}
+        currentStep={currentStep}
+        setCurrentStep={setCurrentStep}
+        isLoading={isLoading}
+        setIsLoading={setIsLoading}
+        imageUploading={imageUploading}
+        setImageUploading={setImageUploading}
+        basicInfo={basicInfo}
+        setBasicInfo={setBasicInfo}
+        themeInfo={themeInfo}
+        setThemeInfo={setThemeInfo}
       />
     </div>
   );

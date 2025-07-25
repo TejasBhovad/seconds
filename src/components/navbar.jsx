@@ -16,8 +16,12 @@ const ProfileSection = ({ session }) => {
   return (
     <div className="flex items-center space-x-2">
       <Link href="/dashboard">
-        <Button href="/dashboard" variant="outline">
-          Dashboard
+        <Button
+          href="/dashboard"
+          variant="outline"
+          className={"hover:bg-muted"}
+        >
+          Create Count
         </Button>
       </Link>
       <Popover>
@@ -30,7 +34,15 @@ const ProfileSection = ({ session }) => {
             className="cursor-pointer rounded-full"
           />
         </PopoverTrigger>
-        <PopoverContent className="h-fit w-fit p-1">
+        <PopoverContent className="flex h-fit w-fit flex-col gap-1 p-1">
+          <Link href="/profile">
+            <Button
+              variant="ghost"
+              className="w-full justify-start text-gray-700 hover:bg-gray-100"
+            >
+              Profile
+            </Button>
+          </Link>
           <SignOut />
         </PopoverContent>
       </Popover>
