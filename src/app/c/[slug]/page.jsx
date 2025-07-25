@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, Mail, User, ExternalLink } from "lucide-react";
+import { getFontStyles } from "@/lib/utils";
 
 // Accepts the dynamic route params as a Promise (Next.js 15+)
 const CountPage = ({ params }) => {
@@ -137,7 +138,7 @@ const CountPage = ({ params }) => {
     <Card className="transition-all duration-300 hover:shadow-lg">
       <CardContent className="flex flex-col items-center justify-center p-4">
         <div
-          className="mb-2 text-3xl font-extrabold tabular-nums md:text-5xl"
+          className={`mb-2 text-3xl font-extrabold tabular-nums md:text-5xl ${countData?.fontStyle ? getFontStyles(countData.fontStyle).className : "font-sans font-normal"}`}
           style={{
             color: countData?.colors?.primary || "#2563eb",
             letterSpacing: "1px",
@@ -146,7 +147,7 @@ const CountPage = ({ params }) => {
           {String(value).padStart(2, "0")}
         </div>
         <div
-          className="text-xs font-semibold tracking-widest uppercase"
+          className={`text-xs font-semibold tracking-widest uppercase ${countData?.fontStyle ? getFontStyles(countData.fontStyle).fontFamily : "font-sans"}`}
           style={{
             color: countData?.colors?.muted || "#95a7c8",
           }}
@@ -278,7 +279,7 @@ const CountPage = ({ params }) => {
 
             {/* Event Title */}
             <h1
-              className="mb-4 text-5xl font-extrabold text-white capitalize drop-shadow-xl md:text-6xl"
+              className={`mb-4 text-5xl font-extrabold text-white capitalize drop-shadow-xl md:text-6xl ${countData?.fontStyle ? getFontStyles(countData.fontStyle).className : "font-sans font-normal"}`}
               style={{ position: "relative", zIndex: 2 }}
             >
               {countData.name}
@@ -286,7 +287,7 @@ const CountPage = ({ params }) => {
 
             {/* Event Date */}
             <p
-              className="mb-8 text-lg font-medium text-white/90 md:text-xl"
+              className={`mb-8 text-lg font-medium text-white/90 md:text-xl ${countData?.fontStyle ? getFontStyles(countData.fontStyle).fontFamily : "font-sans"}`}
               style={{ position: "relative", zIndex: 2 }}
             >
               <Clock className="mr-2 inline h-5 w-5" />
@@ -295,7 +296,7 @@ const CountPage = ({ params }) => {
 
             {/* Creator Info */}
             <div
-              className="flex items-center justify-center gap-2 text-white/80"
+              className={`flex items-center justify-center gap-2 text-white/80 ${countData?.fontStyle ? getFontStyles(countData.fontStyle).fontFamily : "font-sans"}`}
               style={{ position: "relative", zIndex: 2 }}
             >
               <User className="h-4 w-4" />
@@ -314,13 +315,13 @@ const CountPage = ({ params }) => {
             <div className="mb-8">
               <div className="mb-8 text-center">
                 <h2
-                  className="mb-3 text-2xl font-bold md:text-3xl"
+                  className={`mb-3 text-2xl font-bold md:text-3xl ${countData?.fontStyle ? getFontStyles(countData.fontStyle).className : "font-sans font-normal"}`}
                   style={{ color: countData.colors.inverted }}
                 >
                   Event Countdown
                 </h2>
                 <p
-                  className="text-base"
+                  className={`text-base ${countData?.fontStyle ? getFontStyles(countData.fontStyle).fontFamily : "font-sans"}`}
                   style={{ color: countData.colors.muted }}
                 >
                   Time remaining until the event begins
@@ -343,12 +344,15 @@ const CountPage = ({ params }) => {
                 🎉
               </div>
               <h2
-                className="mb-2 text-2xl font-bold md:text-3xl"
+                className={`mb-2 text-2xl font-bold md:text-3xl ${countData?.fontStyle ? getFontStyles(countData.fontStyle).className : "font-sans font-normal"}`}
                 style={{ color: countData.colors.inverted }}
               >
                 Event has started!
               </h2>
-              <p className="text-lg" style={{ color: countData.colors.muted }}>
+              <p
+                className={`text-lg ${countData?.fontStyle ? getFontStyles(countData.fontStyle).fontFamily : "font-sans"}`}
+                style={{ color: countData.colors.muted }}
+              >
                 The countdown has ended. We hope you enjoy the event!
               </p>
             </div>
@@ -364,13 +368,13 @@ const CountPage = ({ params }) => {
                     style={{ color: countData.colors.primary }}
                   />
                   <h2
-                    className="text-xl font-bold"
+                    className={`text-xl font-bold ${countData?.fontStyle ? getFontStyles(countData.fontStyle).className : "font-sans font-normal"}`}
                     style={{ color: countData.colors.primary }}
                   >
                     RSVP for this Event
                   </h2>
                   <p
-                    className="mt-2 text-sm"
+                    className={`mt-2 text-sm ${countData?.fontStyle ? getFontStyles(countData.fontStyle).fontFamily : "font-sans"}`}
                     style={{ color: countData.colors.muted }}
                   >
                     Reserve your spot! Enter your email and RSVP.

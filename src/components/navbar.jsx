@@ -58,6 +58,13 @@ const Navbar = ({ session }) => {
           href="/"
           className="text-lg font-semibold text-gray-800 transition-colors hover:text-gray-600"
         >
+          <Image
+            src="/logo.svg"
+            alt="Seconds Logo"
+            width={32}
+            height={32}
+            className="mr-2 inline-block"
+          />
           Seconds.
         </Link>
         <div className="flex items-center">
