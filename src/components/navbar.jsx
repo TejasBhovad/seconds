@@ -1,9 +1,42 @@
 "use client";
 import React from "react";
+import { Button } from "./ui/button";
 import { useSession } from "next-auth/react";
 import SignIn from "./sign-in";
 import SignOut from "./sign-out";
 import Link from "next/link";
+import Image from "next/image";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+
+const ProfileSection = ({ session }) => {
+  return (
+    <div className="flex items-center space-x-2">
+      <Link href="/dashboard">
+        <Button href="/dashboard" variant="outline">
+          Dashboard
+        </Button>
+      </Link>
+      <Popover>
+        <PopoverTrigger>
+          <Image
+            src={session.user.image}
+            alt={session.user.name}
+            width={32}
+            height={32}
+            className="cursor-pointer rounded-full"
+          />
+        </PopoverTrigger>
+        <PopoverContent className="h-fit w-fit p-1">
+          <SignOut />
+        </PopoverContent>
+      </Popover>
+    </div>
+  );
+};
 
 const Navbar = ({ session }) => {
   return (
@@ -16,7 +49,7 @@ const Navbar = ({ session }) => {
           Seconds.
         </Link>
         <div className="flex items-center">
-          {session ? <SignOut /> : <SignIn />}
+          {session ? <ProfileSection session={session} /> : <SignIn />}
         </div>
       </div>
     </nav>

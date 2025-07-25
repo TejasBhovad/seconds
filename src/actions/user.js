@@ -30,6 +30,21 @@ async function generateUniqueSlug(name) {
   return slug;
 }
 
+// Helper function to serialize MongoDB objects to plain objects
+function serializeUser(user) {
+  if (!user) return null;
+
+  return {
+    id: user._id.toString(),
+    name: user.name,
+    email: user.email,
+    image: user.image || "",
+    slug: user.slug,
+    createdAt: user.createdAt ? user.createdAt.toISOString() : null,
+    updatedAt: user.updatedAt ? user.updatedAt.toISOString() : null,
+  };
+}
+
 export async function createUser(userData) {
   try {
     await connectMongo();
@@ -38,7 +53,7 @@ export async function createUser(userData) {
     const existingUser = await User.findOne({ email: userData.email }).lean();
     if (existingUser) {
       console.log("User already exists:", userData.email);
-      return existingUser;
+      return serializeUser(existingUser);
     }
 
     // Generate slug if not provided or empty
@@ -53,9 +68,9 @@ export async function createUser(userData) {
       slug: userData.slug,
     });
 
-    await user.save();
+    const savedUser = await user.save();
     console.log("User created successfully:", userData.email);
-    return user.toObject();
+    return serializeUser(savedUser.toObject());
   } catch (error) {
     console.error("Error creating user:", error);
     throw new Error("Failed to create user");
@@ -66,7 +81,7 @@ export async function getUserByEmail(email) {
   try {
     await connectMongo();
     const user = await User.findOne({ email }).lean();
-    return user;
+    return serializeUser(user);
   } catch (error) {
     console.error("Error fetching user:", error);
     throw new Error("Failed to fetch user");
@@ -77,7 +92,7 @@ export async function getUserBySlug(slug) {
   try {
     await connectMongo();
     const user = await User.findOne({ slug }).lean();
-    return user;
+    return serializeUser(user);
   } catch (error) {
     console.error("Error fetching user by slug:", error);
     throw new Error("Failed to fetch user");

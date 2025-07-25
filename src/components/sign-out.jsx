@@ -4,7 +4,11 @@ import { Button } from "./ui/button";
 import React from "react";
 
 const SignOut = () => {
-  return <Button onClick={() => signOut()}>Sign Out</Button>;
+  return (
+    <Button variant="ghost" onClick={() => signOut()}>
+      Sign Out
+    </Button>
+  );
 };
 
 export default SignOut;

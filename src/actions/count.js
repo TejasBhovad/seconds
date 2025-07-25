@@ -21,6 +21,7 @@ async function createCount(countData) {
 
     const count = new Count({
       name: countData.name,
+      category: countData.category,
       date: countData.date || new Date(),
       theme: countData.theme || "default",
       colors: {
@@ -129,7 +130,6 @@ async function updateCount(countId, updateData, userId) {
       countId,
       {
         ...updateData,
-
         ...(updateData.colors && {
           colors: {
             ...existingCount.colors.toObject(),
