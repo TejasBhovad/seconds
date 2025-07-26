@@ -2,6 +2,29 @@
 
 A modern, full-stack event countdown application built with Next.js that allows users to create beautiful, customizable countdown timers for any event.
 
+<div align="left" style="margin: 8px 0; border-radius: 12px; overflow: hidden; border: 1px solid #444; display: inline-block;">
+  <table style="background: #202020; border-collapse: collapse; width: 100%; height: 100%; text-align: center; color: #fff; font-family: Arial, sans-serif;">
+    <tr
+     >
+      <td>
+        <a href="https://seconds-site.vercel.app" 
+           style="display: flex; align-items: center; color: #fff; font-weight: bold; text-decoration: none; font-size: 16px; padding: 6px 8px;">
+          <img src="https://raw.githubusercontent.com/TejasBhovad/seconds/refs/heads/main/public/logo.png" 
+               alt="Logo" width="24" height="24" style="margin-right: 6px;"/>
+          Try Now
+        </a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+![open graph image](.github/og.png)
+![img4](.github/seconds4.jpeg)
+
+<!-- ![img1](.github/seconds1.jpeg)
+![img2](.github/seconds2.jpeg)
+![img3](.github/seconds3.jpeg) -->
+
 ## ✨ Features
 
 - **Custom Countdown Timers**: Create personalized countdown timers with custom themes and colors
