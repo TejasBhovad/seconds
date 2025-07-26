@@ -3,7 +3,6 @@ import "./globals.css";
 import AuthProvider from "@/providers/auth";
 import UserProvider from "@/providers/user";
 import NavbarWrapper from "@/components/navbar";
-import Head from "next/head";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,11 +18,19 @@ export const metadata = {
   title: "Seconds - Schedule Countdown Events Easily",
   description:
     "Seconds helps you schedule and share countdowns for your important events.",
+  icons: {
+    icon: [
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: { url: "/apple-touch-icon.png", sizes: "180x180" },
+  },
+  manifest: "/site.webmanifest",
   openGraph: {
     title: "Seconds - Schedule Countdown Events Easily",
     description:
       "Seconds helps you schedule and share countdowns for your important events.",
-    url: "https://seconds-site.vercel.app", // Replace with your actual URL
+    url: "https://seconds-site.vercel.app",
     siteName: "Seconds",
     images: [
       {
@@ -36,40 +43,15 @@ export const metadata = {
     locale: "en_US",
     type: "website",
   },
-
   robots: {
     index: true,
     follow: true,
   },
-  canonical: "https://seconds-site.vercel.app",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <Head>
-        <title>{metadata.title}</title>
-        <meta name="description" content={metadata.description} />
-        <meta name="robots" content="index, follow" />
-        <link rel="canonical" href={metadata.canonical} />
-
-        {/* Open Graph tags */}
-        <meta property="og:title" content={metadata.openGraph.title} />
-        <meta
-          property="og:description"
-          content={metadata.openGraph.description}
-        />
-        <meta property="og:type" content={metadata.openGraph.type} />
-        <meta property="og:url" content={metadata.openGraph.url} />
-        <meta property="og:site_name" content={metadata.openGraph.siteName} />
-        <meta property="og:locale" content={metadata.openGraph.locale} />
-        {metadata.openGraph.images.map(({ url, width, height, alt }, i) => (
-          <meta key={i} property="og:image" content={url} />
-        ))}
-
-        {/* Favicon */}
-        <link rel="icon" href="/icon.svg" />
-      </Head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

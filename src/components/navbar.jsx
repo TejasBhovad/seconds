@@ -63,9 +63,9 @@ const Navbar = ({ session }) => {
             alt="Seconds Logo"
             width={32}
             height={32}
-            className="mr-2 inline-block"
+            className="mr-1 inline-block"
           />
-          Seconds.
+          Seconds
         </Link>
         <div className="flex items-center">
           {session ? <ProfileSection session={session} /> : <SignIn />}
